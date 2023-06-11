@@ -64,8 +64,8 @@ const Dishrow = ({ id, name, description, price, image }) => {
             <TouchableOpacity>
               <MinusCircleIcon
                 size={40}
-                color="#00CCBB"
-                // color={{items.lenght > 0 ? "#00CCBB" : "gray" }}
+                // color="#00CCBB"
+                color={`${items.length > 0 ? "#00CCBB" : "gray"}`}
               />
             </TouchableOpacity>
 
@@ -78,8 +78,8 @@ const Dishrow = ({ id, name, description, price, image }) => {
               <PlusCircleIcon
                 onPress={addItemToBasket}
                 size={40}
-                color="#00CCBB"
-                // color={{items.lenght > 0 ? "#00CCBB" : "gray" }}
+                //color="#00CCBB"
+                color={`${items.length > 0 ? "#00CCBB" : "gray"}`}
               />
             </TouchableOpacity>
           </View>
