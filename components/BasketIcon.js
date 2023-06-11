@@ -12,6 +12,7 @@ const BasketIcon = () => {
     <View className="absolute bottom-10 w-full z-50">
       {/* {console.log(basketTotal)} */}
       <TouchableOpacity
+        onPress={() => navigation.navigate("Basket")}
         className="mx-5 bg-[#00CCBB]
       p-4 rounded-lg flex-row-reverse items-center space-x-1"
       >
