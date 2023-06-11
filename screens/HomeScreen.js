@@ -10,10 +10,9 @@ import {
 import { ScrollView } from "react-native";
 import Categories from "../components/Categories";
 import FeaturedRow from "../components/FeaturedRow";
-import { client } from "./sanity";
-import { URL, URLSearchParams } from "react-native-url-polyfill";
+import { client } from "../sanity";
+
 const HomeScreen = () => {
-  const searchParams = new URLSearchParams("");
   const navigation = useNavigation();
   const [featuredCategories, setFeaturedCategories] = useState([]);
   useLayoutEffect(() => {
@@ -21,6 +20,7 @@ const HomeScreen = () => {
       headerShown: false,
     });
   }, []);
+
   useEffect(() => {
     client
       .fetch(
@@ -31,22 +31,21 @@ const HomeScreen = () => {
        dishes[]->
     }
    }`,
-        searchParams
+        {}
       )
       .then((data) => {
         setFeaturedCategories(data);
-        console.log("data :", data);
+        // console.log("data :", data);
       })
       .catch((error) => {
         console.log("Error:", error);
       });
-
     // const res = getRestaurant();
     // getRestaurant().then((data) => {
     //   setFeaturedCategories(data);
     // });
   }, []);
-  // console.log("data :", featuredCategories);
+
   return (
     <SafeAreaView className="bg-white pt-5 ">
       {/* header */}
@@ -93,6 +92,7 @@ const HomeScreen = () => {
             id={item._id}
             title={item.name}
             description={item.shor_description}
+            // restaurants={item.restaurants}
             // description="Paid placement from our partners"
             // featuredCategory="featured"
           />

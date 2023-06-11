@@ -1,9 +1,34 @@
 import { View, Text, ScrollView } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ArrowRightIcon } from "react-native-heroicons/outline";
 import RestaurantCard from "./RestaurantCard";
+import { client } from "../sanity";
 
 const FeaturedRow = ({ id, title, description }) => {
+  const [restaurants, setRestaurants] = useState([]);
+  useEffect(() => {
+    client
+      .fetch(
+        `
+    *[_type == "featured"  && _id == $id]{
+      ...,
+   restaurants[]->{
+      ...,
+      dishes[]->,
+     type->{
+       name
+     }
+   },
+ }[0]
+    `,
+        { id }
+      )
+      .then((data) => {
+        setRestaurants(data?.restaurants);
+        // console.log(data);
+      });
+  }, [id]);
+
   return (
     <View>
       <View className="mt-4 flex-row items-center justify-between px-4">
@@ -21,42 +46,23 @@ const FeaturedRow = ({ id, title, description }) => {
         className="pt-4"
       >
         {/* RestaurantCards... */}
-        <RestaurantCard
-          id={123}
-          imgUrl="https://links.papareact.com/gn7"
-          title="fo sushi"
-          rating={4.5}
-          genre="Japenese"
-          address="123 Maim st"
-          short_descriptio="this is test description"
-          dishes={[]}
-          long={20}
-          lat={0}
-        />
-        <RestaurantCard
-          id={123}
-          imgUrl="https://links.papareact.com/gn7"
-          title="fo sushi"
-          rating={4.5}
-          genre="Japenese"
-          address="123 Maim st"
-          short_descriptio="this is test description"
-          dishes={[]}
-          long={20}
-          lat={0}
-        />
-        <RestaurantCard
-          id={123}
-          imgUrl="https://links.papareact.com/gn7"
-          title="fo sushi"
-          rating={4.5}
-          genre="Japenese"
-          address="123 Maim st"
-          short_descriptio="this is test description"
-          dishes={[]}
-          long={20}
-          lat={0}
-        />
+
+        {restaurants.map((item, index) => (
+          // console.log(urlFor(item.image).url())
+          <RestaurantCard
+            key={item._id}
+            id={item._id}
+            imgUrl={item.image}
+            title={item.name}
+            rating={item.rating}
+            genre="Japenese"
+            address={item.address}
+            short_descriptio={item.shor_description}
+            dishes={item.dishes}
+            long={item.long}
+            lat={item.lat}
+          />
+        ))}
       </ScrollView>
     </View>
   );
