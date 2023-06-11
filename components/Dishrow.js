@@ -13,6 +13,7 @@ import {
   selectBasketItems,
   removeFromBasket,
 } from "../features/basketSlice";
+
 const Dishrow = ({ id, name, description, price, image }) => {
   const [isPressed, setIsPressed] = useState(false);
   const items = useSelector((state) => selectBasketItemWithId(state, id));
