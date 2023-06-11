@@ -48,16 +48,15 @@ const FeaturedRow = ({ id, title, description }) => {
         {/* RestaurantCards... */}
 
         {restaurants.map((item, index) => (
-          // console.log(urlFor(item.image).url())
           <RestaurantCard
             key={item._id}
             id={item._id}
             imgUrl={item.image}
             title={item.name}
             rating={item.rating}
-            genre="Japenese"
+            genre={item.type.name}
             address={item.address}
-            short_descriptio={item.shor_description}
+            short_description={item.shor_description}
             dishes={item.dishes}
             long={item.long}
             lat={item.lat}

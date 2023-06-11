@@ -1,0 +1,88 @@
+import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
+import React, { useLayoutEffect } from "react";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { urlFor } from "../sanity";
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  ChevronDoubleLeftIcon,
+  MagnifyingGlassIcon,
+  MapPinIcon,
+  QuestionMarkCircleIcon,
+  StarIcon,
+} from "react-native-heroicons/outline";
+
+const RestaurantScreen = () => {
+  const navigation = useNavigation();
+  const {
+    params: {
+      id,
+      imgUrl,
+      title,
+      rating,
+      genre,
+      address,
+      short_description,
+      dishes,
+      long,
+      lat,
+    },
+  } = useRoute();
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerShown: false,
+    });
+  });
+  return (
+    <ScrollView>
+      <View className="relative">
+        <Image
+          source={{
+            uri: urlFor(imgUrl).url(),
+          }}
+          className="w-full h-56 bg-gray-300 p-4"
+        />
+      </View>
+      <TouchableOpacity
+        className="absolute top-14 left-5 
+      p-2 bg-gray-500 rounded-full"
+        onPress={() => navigation.goBack()}
+      >
+        <ArrowLeftIcon height={20} color="#00CCBB" />
+      </TouchableOpacity>
+      <View className="bg-white">
+        <View className="pt-4 px-4">
+          <Text className="text-3xl font-bold">{title}</Text>
+          <View className="flex-row-reverse space-x-2 my-1">
+            <StarIcon color="#00CCBB" opacity={0.5} size={22} />
+            <Text className="text-green-500">
+              {genre} . {rating}
+            </Text>
+          </View>
+          <View className="flex-row-reverse items-center space-x-1">
+            <MapPinIcon color="gray" opacity={0.4} size={22} />
+            <Text className="text-xs text-gray-500 pl-2">آدرس . {address}</Text>
+          </View>
+          <Text className="text-gray-500 mt-2 pb-4">{short_description}</Text>
+        </View>
+        <TouchableOpacity
+          className="flex-row-reverse 
+        items-center space-x-2 p-4 border-y border-gray-300 "
+        >
+          <QuestionMarkCircleIcon color="gray" size={20} />
+          <Text className="pr-2 text-right flex-1 text-md font-bold">
+            آلرژی غذایی دارید؟
+          </Text>
+          <ChevronDoubleLeftIcon color="#00CCBB" />
+        </TouchableOpacity>
+      </View>
+
+      <View>
+        <Text className="px-4 pt-6 mb-3 font-bold text-xl">منو</Text>
+        {/* Dishrows */}
+      </View>
+    </ScrollView>
+  );
+};
+
+export default RestaurantScreen;
