@@ -67,6 +67,7 @@ const HomeScreen = () => {
 
         <UserIcon size={35} color="#00CCBB" />
       </View>
+
       {/* search box */}
       <View className="flex-row items-center pb-2 mx-4 ">
         <View className="flex-row flex-1 space-x-2 bg-gray-200 p-3">

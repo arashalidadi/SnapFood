@@ -11,6 +11,7 @@ import {
   QuestionMarkCircleIcon,
   StarIcon,
 } from "react-native-heroicons/outline";
+import Dishrow from "../components/Dishrow";
 
 const RestaurantScreen = () => {
   const navigation = useNavigation();
@@ -80,6 +81,16 @@ const RestaurantScreen = () => {
       <View>
         <Text className="px-4 pt-6 mb-3 font-bold text-xl">منو</Text>
         {/* Dishrows */}
+        {dishes.map((dish) => (
+          <Dishrow
+            key={dish._id}
+            id={dish._id}
+            name={dish.name}
+            description={dish.shor_description}
+            price={dish.price}
+            image={dish.image}
+          />
+        ))}
       </View>
     </ScrollView>
   );
