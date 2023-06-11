@@ -22,6 +22,8 @@ const Categories = () => {
       contentContainerStyle={{
         paddingHorizontal: 15,
         paddingTop: 10,
+        flexDirection: "row-reverse",
+        direction: "rtl",
       }}
       horizontal
       showsHorizontalScrollIndicator={false}
