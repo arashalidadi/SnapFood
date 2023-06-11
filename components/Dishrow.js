@@ -7,10 +7,14 @@ import {
   PlusCircleIcon,
 } from "react-native-heroicons/outline";
 import { useDispatch, useSelector } from "react-redux";
-import { addToBasket, selectBasketItems } from "../features/basketSlice";
+import {
+  addToBasket,
+  selectBasketItemWithId,
+  selectBasketItems,
+} from "../features/basketSlice";
 const Dishrow = ({ id, name, description, price, image }) => {
   const [isPressed, setIsPressed] = useState(false);
-  const items = useSelector(selectBasketItems);
+  const items = useSelector((state) => selectBasketItemWithId(state, id));
   const dispatch = useDispatch();
 
   const addItemToBasket = () => {
