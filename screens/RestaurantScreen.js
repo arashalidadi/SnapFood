@@ -48,7 +48,7 @@ const RestaurantScreen = () => {
         lat,
       })
     );
-  }, [dispatch]);
+  }, []);
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
